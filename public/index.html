@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast Production System - Professional Podcast Studio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .hero-pure {
+      background-image: url('/images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      min-height: 550px;
+      height: auto;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+      position: relative;
+      width: 100%;
+    }
+    .hero-pure .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    .hero-pure .hero-text {
+      background: rgba(0, 0, 0, 0.65);
+      padding: 35px 40px;
+      border-radius: var(--radius);
+      max-width: 580px;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .hero-pure h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: white;
+      line-height: 1.2;
+    }
+    .hero-pure p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .hero-pure .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .hero-pure .btn-primary:hover {
+      opacity: 0.9;
+      color: white;
+      text-decoration: none;
+    }
+    .hero-pure .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .hero-pure .btn-secondary:hover {
+      background: rgba(255,255,255,0.25);
+      color: white;
+      text-decoration: none;
+    }
+    .hero-pure .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 1024px) {
+      .hero-pure {
+        min-height: 450px;
+        padding: 50px 0;
+      }
+      .hero-pure h1 {
+        font-size: 2.4rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-pure {
+        min-height: 400px;
+        padding: 40px 0;
+        background-attachment: scroll;
+      }
+      .hero-pure .hero-text {
+        padding: 25px 20px;
+        max-width: 100%;
+      }
+      .hero-pure h1 {
+        font-size: 1.8rem;
+      }
+      .hero-pure p {
+        font-size: 1rem;
+      }
+      .hero-pure .btn-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero-pure .btn-primary,
+      .hero-pure .btn-secondary {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-pure {
+        min-height: 350px;
+        padding: 30px 0;
+      }
+      .hero-pure .hero-text {
+        padding: 20px 15px;
+      }
+      .hero-pure h1 {
+        font-size: 1.5rem;
+      }
+      .hero-pure p {
+        font-size: 0.9rem;
+      }
+    }
+    @media (orientation: landscape) and (max-height: 500px) {
+      .hero-pure {
+        min-height: 300px;
+        padding: 20px 0;
+      }
+      .hero-pure h1 {
+        font-size: 1.6rem;
+      }
+      .hero-pure p {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+      }
+      .hero-pure .hero-text {
+        padding: 15px 20px;
+      }
+    }
+    .hero-pure {
+      background-color: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-navbar">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="/" style="font-weight:700;font-size:1.25rem;color:var(--primary);text-decoration:none;">
+        <i class="fas fa-microphone"></i> PodcastPro
+      </a>
+      <div style="display:flex;gap:20px;">
+        <a href="/" style="color:var(--text-secondary);text-decoration:none;">Home</a>
+        <a href="/podcasts" style="color:var(--text-secondary);text-decoration:none;">Podcasts</a>
+        <a href="/categories" style="color:var(--text-secondary);text-decoration:none;">Categories</a>
+        <a href="/about" style="color:var(--text-secondary);text-decoration:none;">About</a>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;">
+      <a href="/login" class="btn-secondary" style="padding:8px 16px;">Dashboard</a>
+      <a href="/login" class="btn-primary" style="padding:8px 16px;">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section - Pure Image Background -->
+  <section class="hero-pure" id="heroSection">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px;width:100%;">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Produce Professional Podcasts Anytime, Anywhere</h1>
+          <p>Podcast Production Platform for Audio & Video Creators</p>
+          <div class="btn-group">
+            <a href="/studio" class="btn-primary"><i class="fas fa-circle"></i> Start Recording</a>
+            <a href="/podcasts" class="btn-secondary">Explore Podcasts</a>
+            <a href="/studio" class="btn-secondary"><i class="fas fa-broadcast"></i> Live Podcast</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div class="statistics-bar">
+      <div class="stat-item">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Active Podcasts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Episodes Published</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1M+</div>
+        <div class="stat-label">Monthly Listeners</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5K+</div>
+        <div class="stat-label">Content Creators</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Podcasts -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <h2 style="margin:40px 0 20px;">Featured Podcasts</h2>
+    <div class="podcast-grid">
+      <div class="podcast-card">
+        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Tech+Talk" alt="Tech Talk">
+        <div class="podcast-card-body">
+          <div class="podcast-card-title">Tech Talk Daily</div>
+          <div class="podcast-card-meta"><i class="fas fa-user"></i> Munyampeta Fiston</div>
+          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 45 min</div>
+          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
+        </div>
+      </div>
+      <div class="podcast-card">
+        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Business+Insights" alt="Business Insights">
+        <div class="podcast-card-body">
+          <div class="podcast-card-title">Business Insights</div>
+          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dukundane Belyse</div>
+          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 30 min</div>
+          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
+        </div>
+      </div>
+      <div class="podcast-card">
+        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Health+Wellness" alt="Health Wellness">
+        <div class="podcast-card-body">
+          <div class="podcast-card-title">Health & Wellness</div>
+          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dushime Divine & Tuyisenge Kellia</div>
+          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 35 min</div>
+          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
+        </div>
+      </div>
+      <div class="podcast-card">
+        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Music+Masters" alt="Music Masters">
+        <div class="podcast-card-body">
+          <div class="podcast-card-title">Music Masters</div>
+          <div class="podcast-card-meta"><i class="fas fa-user"></i> Rutaganda Morris</div>
+          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 50 min</div>
+          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Categories -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <h2 style="margin:40px 0 20px;">Popular Categories</h2>
+    <div class="features-grid">
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-microchip feature-icon"></i><h3>Technology</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-graduation-cap feature-icon"></i><h3>Education</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-chart-line feature-icon"></i><h3>Business</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-film feature-icon"></i><h3>Entertainment</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-heartbeat feature-icon"></i><h3>Health</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-music feature-icon"></i><h3>Music</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-futbol feature-icon"></i><h3>Sports</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-newspaper feature-icon"></i><h3>News</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-laugh feature-icon"></i><h3>Comedy</h3></div>
+      </a>
+      <a href="/categories" style="text-decoration:none;color:inherit;">
+        <div class="feature-card"><i class="fas fa-leaf feature-icon"></i><h3>Lifestyle</h3></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Latest Episodes -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <h2 style="margin:40px 0 20px;">Latest Episodes</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Episode</th>
+            <th>Podcast</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI Revolution</td>
+            <td>Tech Talk Daily</td>
+            <td>Jan 15, 2026</td>
+            <td>45:30</td>
+            <td><span class="badge" style="background:var(--success);">Published</span></td>
+            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+          </tr>
+          <tr>
+            <td>Investment Strategies</td>
+            <td>Business Insights</td>
+            <td>Jan 14, 2026</td>
+            <td>32:15</td>
+            <td><span class="badge" style="background:var(--warning);">Scheduled</span></td>
+            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+          </tr>
+          <tr>
+            <td>Mindfulness Meditation</td>
+            <td>Health & Wellness</td>
+            <td>Jan 13, 2026</td>
+            <td>28:40</td>
+            <td><span class="badge" style="background:var(--success);">Published</span></td>
+            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+          </tr>
+          <tr>
+            <td>Jazz Improvisation</td>
+            <td>Music Masters</td>
+            <td>Jan 12, 2026</td>
+            <td>52:20</td>
+            <td><span class="badge" style="background:var(--danger);">Draft</span></td>
+            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;">
+        <div>
+          <h4 style="color:white;margin-bottom:12px;">PodcastPro</h4>
+          <p style="font-size:0.875rem;">Professional podcast production platform for creators worldwide.</p>
+          <div style="display:flex;gap:12px;margin-top:12px;">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Quick Links</h5>
+          <ul style="list-style:none;">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Features</h5>
+          <ul style="list-style:none;">
+            <li><a href="/studio">Recording Studio</a></li>
+            <li><a href="/studio">Editing Tools</a></li>
+            <li><a href="/login">Analytics</a></li>
+            <li><a href="/login">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Newsletter</h5>
+          <p style="font-size:0.875rem;">Subscribe for updates and tips.</p>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="email" placeholder="Enter email" style="flex:1;padding:8px;border-radius:6px;border:none;">
+            <button class="btn-primary" style="padding:8px 16px;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+        &copy; 2026 Podcast Production System. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hero = document.querySelector('.hero-pure');
+      const img = new Image();
+      img.src = '/images/hero-bg.jpg';
+      img.onload = function() {
+        hero.style.backgroundImage = "url('/images/hero-bg.jpg')";
+      };
+      img.onerror = function() {
+        hero.style.background = 'linear-gradient(135deg, #1a1a1a, #2d2d2d)';
+      };
+    });
+  </script>
+</body>
+</html>

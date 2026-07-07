@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories - Podcast Production System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .category-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px 20px;
+      text-align: center;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .category-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+    .category-card .category-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .category-card .category-count {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 8px 0;
+    }
+    .category-card .category-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .category-card .browse-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--accent);
+      color: var(--text-primary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .category-card .browse-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .category-card .category-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: white;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .categories-header {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: white;
+      padding: 40px;
+      border-radius: var(--radius);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .categories-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    .categories-header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    .category-stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .category-stats span {
+      background: rgba(255,255,255,0.1);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-navbar">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="/" style="font-weight:700;font-size:1.25rem;color:var(--primary);text-decoration:none;">
+        <i class="fas fa-microphone"></i> PodcastPro
+      </a>
+      <div style="display:flex;gap:20px;">
+        <a href="/" style="color:var(--text-secondary);text-decoration:none;">Home</a>
+        <a href="/podcasts" style="color:var(--text-secondary);text-decoration:none;">Podcasts</a>
+        <a href="/categories" style="color:var(--primary);text-decoration:none;font-weight:600;">Categories</a>
+        <a href="/about" style="color:var(--text-secondary);text-decoration:none;">About</a>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;">
+      <a href="/dashboard" class="btn-secondary" style="padding:8px 16px;">Dashboard</a>
+      <a href="/login" class="btn-primary" style="padding:8px 16px;">Sign In</a>
+    </div>
+  </nav>
+
+  <div style="max-width:1200px;margin:0 auto;padding:20px;">
+    <!-- Categories Header -->
+    <div class="categories-header">
+      <i class="fas fa-th-large" style="font-size:3rem;margin-bottom:12px;opacity:0.8;"></i>
+      <h1>Browse Categories</h1>
+      <p>Discover podcasts by category and find your next favorite show</p>
+      <div class="category-stats">
+        <span><i class="fas fa-podcast"></i> 12 Categories</span>
+        <span><i class="fas fa-microphone"></i> 2,500+ Podcasts</span>
+        <span><i class="fas fa-users"></i> 50K+ Subscribers</span>
+      </div>
+    </div>
+
+    <!-- Category Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;">
+      <!-- Technology -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Technology'">
+        <span class="category-badge">Popular</span>
+        <i class="fas fa-microchip category-icon"></i>
+        <div class="category-name">Technology</div>
+        <div class="category-count">345</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Technology'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Education -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Education'">
+        <span class="category-badge">Trending</span>
+        <i class="fas fa-graduation-cap category-icon"></i>
+        <div class="category-name">Education</div>
+        <div class="category-count">289</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Education'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Business -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Business'">
+        <span class="category-badge">Featured</span>
+        <i class="fas fa-chart-line category-icon"></i>
+        <div class="category-name">Business</div>
+        <div class="category-count">412</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Business'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Entertainment -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Entertainment'">
+        <span class="category-badge">Most Listened</span>
+        <i class="fas fa-film category-icon"></i>
+        <div class="category-name">Entertainment</div>
+        <div class="category-count">567</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Entertainment'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Health -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Health'">
+        <i class="fas fa-heartbeat category-icon"></i>
+        <div class="category-name">Health</div>
+        <div class="category-count">198</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Health'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Music -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Music'">
+        <span class="category-badge">Popular</span>
+        <i class="fas fa-music category-icon"></i>
+        <div class="category-name">Music</div>
+        <div class="category-count">234</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Music'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Sports -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Sports'">
+        <i class="fas fa-futbol category-icon"></i>
+        <div class="category-name">Sports</div>
+        <div class="category-count">178</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Sports'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- News -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=News'">
+        <span class="category-badge">Trending</span>
+        <i class="fas fa-newspaper category-icon"></i>
+        <div class="category-name">News</div>
+        <div class="category-count">156</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=News'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Comedy -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Comedy'">
+        <i class="fas fa-laugh category-icon"></i>
+        <div class="category-name">Comedy</div>
+        <div class="category-count">203</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Comedy'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Lifestyle -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Lifestyle'">
+        <i class="fas fa-leaf category-icon"></i>
+        <div class="category-name">Lifestyle</div>
+        <div class="category-count">167</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Lifestyle'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- AI & Tech -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=AI & Tech'">
+        <span class="category-badge">New</span>
+        <i class="fas fa-robot category-icon"></i>
+        <div class="category-name">AI & Tech</div>
+        <div class="category-count">145</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=AI & Tech'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+
+      <!-- Culture -->
+      <div class="category-card" onclick="window.location.href='/podcasts?category=Culture'">
+        <i class="fas fa-globe category-icon"></i>
+        <div class="category-name">Culture</div>
+        <div class="category-count">189</div>
+        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
+        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Culture'">
+          <i class="fas fa-arrow-right"></i> Browse
+        </button>
+      </div>
+    </div>
+
+    <!-- Featured Categories Section -->
+    <div style="margin-top:50px;background:var(--accent);border-radius:var(--radius);padding:30px;">
+      <h2 style="margin-bottom:20px;text-align:center;">Top Categories This Week</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+          <div style="font-weight:700;font-size:1.2rem;">Entertainment</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;">567 podcasts</div>
+        </div>
+        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+          <div style="font-weight:700;font-size:1.2rem;">Business</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;">412 podcasts</div>
+        </div>
+        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+          <div style="font-weight:700;font-size:1.2rem;">Technology</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;">345 podcasts</div>
+        </div>
+        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+          <div style="font-weight:700;font-size:1.2rem;">Education</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;">289 podcasts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;">
+        <div>
+          <h4 style="color:white;margin-bottom:12px;">PodcastPro</h4>
+          <p style="font-size:0.875rem;">Professional podcast production platform for creators worldwide.</p>
+          <div style="display:flex;gap:12px;margin-top:12px;">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Quick Links</h5>
+          <ul style="list-style:none;">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Features</h5>
+          <ul style="list-style:none;">
+            <li><a href="/studio">Recording Studio</a></li>
+            <li><a href="/studio">Editing Tools</a></li>
+            <li><a href="/dashboard">Analytics</a></li>
+            <li><a href="/dashboard">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Newsletter</h5>
+          <p style="font-size:0.875rem;">Subscribe for updates and tips.</p>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="email" placeholder="Enter email" style="flex:1;padding:8px;border-radius:6px;border:none;">
+            <button class="btn-primary" style="padding:8px 16px;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+        &copy; 2026 Podcast Production System. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

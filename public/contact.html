@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Podcast Production System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-navbar">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="/" style="font-weight:700;font-size:1.25rem;color:var(--primary);text-decoration:none;">
+        <i class="fas fa-microphone"></i> PodcastPro
+      </a>
+      <div style="display:flex;gap:20px;">
+        <a href="/" style="color:var(--text-secondary);text-decoration:none;">Home</a>
+        <a href="/podcasts" style="color:var(--text-secondary);text-decoration:none;">Podcasts</a>
+        <a href="/categories" style="color:var(--text-secondary);text-decoration:none;">Categories</a>
+        <a href="/about" style="color:var(--text-secondary);text-decoration:none;">About</a>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;">
+      <a href="/dashboard" class="btn-secondary" style="padding:8px 16px;">Dashboard</a>
+      <a href="/login" class="btn-primary" style="padding:8px 16px;">Sign In</a>
+    </div>
+  </nav>
+
+  <div style="max-width:1200px;margin:0 auto;padding:20px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+      <!-- Contact Form -->
+      <div>
+        <h1 style="margin-bottom:10px;">Get in Touch</h1>
+        <p style="color:var(--text-secondary);margin-bottom:30px;">Have questions or feedback? We'd love to hear from you.</p>
+        
+        <div class="card">
+          <form>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select class="form-control">
+                <option>General Inquiry</option>
+                <option>Technical Support</option>
+                <option>Partnership</option>
+                <option>Feedback</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="6" placeholder="Your message..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <div style="background:var(--secondary);color:white;border-radius:var(--radius);padding:30px;margin-bottom:24px;">
+          <h2 style="color:white;margin-bottom:16px;">Contact Information</h2>
+          <div style="margin-bottom:16px;">
+            <i class="fas fa-envelope" style="color:var(--primary);width:24px;"></i>
+            <span>support@podcastpro.com</span>
+          </div>
+          <div style="margin-bottom:16px;">
+            <i class="fas fa-phone" style="color:var(--primary);width:24px;"></i>
+            <span>+1 (555) 123-4567</span>
+          </div>
+          <div style="margin-bottom:16px;">
+            <i class="fas fa-map-marker-alt" style="color:var(--primary);width:24px;"></i>
+            <span>123 Podcast Street,<br>New York, NY 10001</span>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <a href="#" style="color:white;font-size:1.5rem;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color:white;font-size:1.5rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color:white;font-size:1.5rem;"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Office Hours</h3>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span>Monday - Friday</span>
+            <span>9:00 AM - 6:00 PM</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
+            <span>Saturday</span>
+            <span>10:00 AM - 4:00 PM</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;">
+            <span>Sunday</span>
+            <span>Closed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;">
+        <div>
+          <h4 style="color:white;margin-bottom:12px;">PodcastPro</h4>
+          <p style="font-size:0.875rem;">Professional podcast production platform for creators worldwide.</p>
+          <div style="display:flex;gap:12px;margin-top:12px;">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Quick Links</h5>
+          <ul style="list-style:none;">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Features</h5>
+          <ul style="list-style:none;">
+            <li><a href="/studio">Recording Studio</a></li>
+            <li><a href="/studio">Editing Tools</a></li>
+            <li><a href="/dashboard">Analytics</a></li>
+            <li><a href="/subscriptions">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 style="color:white;margin-bottom:8px;">Newsletter</h5>
+          <p style="font-size:0.875rem;">Subscribe for updates and tips.</p>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="email" placeholder="Enter email" style="flex:1;padding:8px;border-radius:6px;border:none;">
+            <button class="btn-primary" style="padding:8px 16px;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+        &copy; 2026 Podcast Production System. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
