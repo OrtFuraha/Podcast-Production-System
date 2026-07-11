@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,11 +22,13 @@
       position: relative;
       width: 100%;
     }
+
     .hero-pure .hero-content {
       position: relative;
       z-index: 1;
       width: 100%;
     }
+
     .hero-pure .hero-text {
       background: rgba(0, 0, 0, 0.65);
       padding: 35px 40px;
@@ -34,6 +37,7 @@
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
+
     .hero-pure h1 {
       font-size: 2.8rem;
       font-weight: 800;
@@ -41,12 +45,14 @@
       color: white;
       line-height: 1.2;
     }
+
     .hero-pure p {
       font-size: 1.15rem;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255, 255, 255, 0.92);
       margin-bottom: 24px;
       line-height: 1.5;
     }
+
     .hero-pure .btn-primary {
       background: var(--primary);
       color: white;
@@ -58,14 +64,16 @@
       display: inline-block;
       transition: opacity 0.2s;
     }
+
     .hero-pure .btn-primary:hover {
       opacity: 0.9;
       color: white;
       text-decoration: none;
     }
+
     .hero-pure .btn-secondary {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: white;
       padding: 12px 24px;
       border-radius: 8px;
@@ -74,45 +82,55 @@
       display: inline-block;
       transition: background 0.2s;
     }
+
     .hero-pure .btn-secondary:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
       color: white;
       text-decoration: none;
     }
+
     .hero-pure .btn-group {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
     }
+
     @media (max-width: 1024px) {
       .hero-pure {
         min-height: 450px;
         padding: 50px 0;
       }
+
       .hero-pure h1 {
         font-size: 2.4rem;
       }
     }
+
     @media (max-width: 768px) {
       .hero-pure {
         min-height: 400px;
         padding: 40px 0;
         background-attachment: scroll;
       }
+
       .hero-pure .hero-text {
         padding: 25px 20px;
         max-width: 100%;
       }
+
       .hero-pure h1 {
         font-size: 1.8rem;
       }
+
       .hero-pure p {
         font-size: 1rem;
       }
+
       .hero-pure .btn-group {
         flex-direction: column;
         gap: 10px;
       }
+
       .hero-pure .btn-primary,
       .hero-pure .btn-secondary {
         width: 100%;
@@ -120,42 +138,52 @@
         padding: 14px 20px;
       }
     }
+
     @media (max-width: 480px) {
       .hero-pure {
         min-height: 350px;
         padding: 30px 0;
       }
+
       .hero-pure .hero-text {
         padding: 20px 15px;
       }
+
       .hero-pure h1 {
         font-size: 1.5rem;
       }
+
       .hero-pure p {
         font-size: 0.9rem;
       }
     }
+
     @media (orientation: landscape) and (max-height: 500px) {
       .hero-pure {
         min-height: 300px;
         padding: 20px 0;
       }
+
       .hero-pure h1 {
         font-size: 1.6rem;
       }
+
       .hero-pure p {
         font-size: 0.9rem;
         margin-bottom: 16px;
       }
+
       .hero-pure .hero-text {
         padding: 15px 20px;
       }
     }
+
     .hero-pure {
       background-color: #1a1a1a;
     }
   </style>
 </head>
+
 <body>
   <!-- Navigation -->
   <nav class="top-navbar">
@@ -171,7 +199,7 @@
       </div>
     </div>
     <div style="display:flex;gap:12px;">
-      <a href="/login" class="btn-secondary" style="padding:8px 16px;">Dashboard</a>
+      <a href="/dashboard" class="btn-secondary" style="padding:8px 16px;">Dashboard</a>
       <a href="/login" class="btn-primary" style="padding:8px 16px;">Sign In</a>
     </div>
   </nav>
@@ -197,20 +225,20 @@
   <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
     <div class="statistics-bar">
       <div class="stat-item">
-        <div class="stat-number">10K+</div>
+        <div class="stat-number" id="statPodcastsCount">-</div>
         <div class="stat-label">Active Podcasts</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">50K+</div>
+        <div class="stat-number" id="statEpisodesCount">-</div>
         <div class="stat-label">Episodes Published</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">1M+</div>
-        <div class="stat-label">Monthly Listeners</div>
+        <div class="stat-number" id="statViewsCount">-</div>
+        <div class="stat-label">Total Views</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">5K+</div>
-        <div class="stat-label">Content Creators</div>
+        <div class="stat-number" id="statSubscribersCount">-</div>
+        <div class="stat-label">Subscribers</div>
       </div>
     </div>
   </div>
@@ -218,80 +246,16 @@
   <!-- Featured Podcasts -->
   <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
     <h2 style="margin:40px 0 20px;">Featured Podcasts</h2>
-    <div class="podcast-grid">
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Tech+Talk" alt="Tech Talk">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Tech Talk Daily</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Munyampeta Fiston</div>
-          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 45 min</div>
-          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
-        </div>
-      </div>
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Business+Insights" alt="Business Insights">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Business Insights</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dukundane Belyse</div>
-          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 30 min</div>
-          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
-        </div>
-      </div>
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Health+Wellness" alt="Health Wellness">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Health & Wellness</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dushime Divine & Tuyisenge Kellia</div>
-          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 35 min</div>
-          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
-        </div>
-      </div>
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x160/000000/C1121F?text=Music+Masters" alt="Music Masters">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Music Masters</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Rutaganda Morris</div>
-          <div class="podcast-card-meta"><i class="fas fa-clock"></i> 50 min</div>
-          <a href="/podcasts" class="btn-secondary" style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
-        </div>
-      </div>
+    <div class="podcast-grid" id="featuredPodcastsGrid">
+      <div style="padding:20px;color:var(--text-secondary);">Loading podcasts...</div>
     </div>
   </div>
 
   <!-- Popular Categories -->
   <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
     <h2 style="margin:40px 0 20px;">Popular Categories</h2>
-    <div class="features-grid">
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-microchip feature-icon"></i><h3>Technology</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-graduation-cap feature-icon"></i><h3>Education</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-chart-line feature-icon"></i><h3>Business</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-film feature-icon"></i><h3>Entertainment</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-heartbeat feature-icon"></i><h3>Health</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-music feature-icon"></i><h3>Music</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-futbol feature-icon"></i><h3>Sports</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-newspaper feature-icon"></i><h3>News</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-laugh feature-icon"></i><h3>Comedy</h3></div>
-      </a>
-      <a href="/categories" style="text-decoration:none;color:inherit;">
-        <div class="feature-card"><i class="fas fa-leaf feature-icon"></i><h3>Lifestyle</h3></div>
-      </a>
+    <div class="features-grid" id="categoriesGrid">
+      <div style="padding:20px;color:var(--text-secondary);">Loading categories...</div>
     </div>
   </div>
 
@@ -310,38 +274,9 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="latestEpisodesBody">
           <tr>
-            <td>AI Revolution</td>
-            <td>Tech Talk Daily</td>
-            <td>Jan 15, 2026</td>
-            <td>45:30</td>
-            <td><span class="badge" style="background:var(--success);">Published</span></td>
-            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
-          </tr>
-          <tr>
-            <td>Investment Strategies</td>
-            <td>Business Insights</td>
-            <td>Jan 14, 2026</td>
-            <td>32:15</td>
-            <td><span class="badge" style="background:var(--warning);">Scheduled</span></td>
-            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
-          </tr>
-          <tr>
-            <td>Mindfulness Meditation</td>
-            <td>Health & Wellness</td>
-            <td>Jan 13, 2026</td>
-            <td>28:40</td>
-            <td><span class="badge" style="background:var(--success);">Published</span></td>
-            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
-          </tr>
-          <tr>
-            <td>Jazz Improvisation</td>
-            <td>Music Masters</td>
-            <td>Jan 12, 2026</td>
-            <td>52:20</td>
-            <td><span class="badge" style="background:var(--danger);">Draft</span></td>
-            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+            <td colspan="6" style="text-align:center;color:var(--text-secondary);">Loading episodes...</td>
           </tr>
         </tbody>
       </table>
@@ -375,8 +310,8 @@
           <ul style="list-style:none;">
             <li><a href="/studio">Recording Studio</a></li>
             <li><a href="/studio">Editing Tools</a></li>
-            <li><a href="/login">Analytics</a></li>
-            <li><a href="/login">Subscriptions</a></li>
+            <li><a href="/dashboard">Analytics</a></li>
+            <li><a href="/dashboard">Subscriptions</a></li>
           </ul>
         </div>
         <div>
@@ -388,7 +323,8 @@
           </div>
         </div>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+      <div
+        style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
         &copy; 2026 Podcast Production System. All rights reserved.
       </div>
     </div>
@@ -396,17 +332,134 @@
 
   <script src="js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    const CATEGORY_ICONS = {
+      'fa-microchip': 'fa-microchip', 'fa-graduation-cap': 'fa-graduation-cap',
+      'fa-chart-line': 'fa-chart-line', 'fa-film': 'fa-film', 'fa-heartbeat': 'fa-heartbeat',
+      'fa-music': 'fa-music', 'fa-futbol': 'fa-futbol', 'fa-newspaper': 'fa-newspaper',
+      'fa-laugh': 'fa-laugh', 'fa-leaf': 'fa-leaf'
+    };
+
+    async function loadStats() {
+      try {
+        const result = await apiRequest('/analytics/dashboard');
+        if (result && result.success) {
+          const d = result.data;
+          document.getElementById('statPodcastsCount').textContent = d.totalPodcasts;
+          document.getElementById('statEpisodesCount').textContent = d.totalEpisodes;
+          document.getElementById('statViewsCount').textContent = d.views;
+          document.getElementById('statSubscribersCount').textContent = d.subscribers;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function loadFeaturedPodcasts() {
+      const grid = document.getElementById('featuredPodcastsGrid');
+      try {
+        const result = await apiRequest('/podcasts');
+        const podcasts = (result && result.success) ? result.data : [];
+        let featured = podcasts.filter((p) => p.is_featured);
+        if (featured.length === 0) featured = podcasts.slice(0, 4);
+        else featured = featured.slice(0, 4);
+
+        if (featured.length === 0) {
+          grid.innerHTML = '<div style="padding:20px;color:var(--text-secondary);">No podcasts yet.</div>';
+          return;
+        }
+
+        grid.innerHTML = featured.map((p) => `
+          <div class="podcast-card">
+            <img src="${p.cover_image || 'https://loremflickr.com/400/160/podcast'}" alt="${p.title}">
+            <div class="podcast-card-body">
+              <div class="podcast-card-title">${p.title}</div>
+              <div class="podcast-card-meta"><i class="fas fa-user"></i> ${p.host}</div>
+              <div class="podcast-card-meta"><i class="fas fa-microphone"></i> ${p.episode_count || 0} episodes</div>
+              <a href="/podcasts?category=${encodeURIComponent(p.category)}" class="btn-secondary"
+                style="margin-top:8px;padding:4px 12px;font-size:0.875rem;display:inline-block;">Listen Now</a>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = '<div style="padding:20px;color:var(--text-secondary);">Unable to load podcasts.</div>';
+      }
+    }
+
+    async function loadCategoriesGrid() {
+      const grid = document.getElementById('categoriesGrid');
+      try {
+        const result = await fetchCategories();
+        const categories = (result && result.success) ? result.data : [];
+        if (categories.length === 0) {
+          grid.innerHTML = '<div style="padding:20px;color:var(--text-secondary);">No categories yet.</div>';
+          return;
+        }
+        grid.innerHTML = categories.map((c) => `
+          <a href="/podcasts?category=${encodeURIComponent(c.name)}" style="text-decoration:none;color:inherit;">
+            <div class="feature-card"><i class="fas ${c.icon || 'fa-folder'} feature-icon"></i>
+              <h3>${c.name}</h3>
+            </div>
+          </a>
+        `).join('');
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = '<div style="padding:20px;color:var(--text-secondary);">Unable to load categories.</div>';
+      }
+    }
+
+    async function loadLatestEpisodes() {
+      const tbody = document.getElementById('latestEpisodesBody');
+      try {
+        const [episodesResult, podcastsResult] = await Promise.all([
+          apiRequest('/episodes'),
+          apiRequest('/podcasts'),
+        ]);
+        const episodes = (episodesResult && episodesResult.success) ? episodesResult.data : [];
+        const podcasts = (podcastsResult && podcastsResult.success) ? podcastsResult.data : [];
+        const podcastMap = {};
+        podcasts.forEach((p) => { podcastMap[p.id] = p.title; });
+
+        const latest = episodes.slice(0, 4);
+        if (latest.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);">No episodes yet.</td></tr>';
+          return;
+        }
+
+        const statusColor = { published: 'var(--success)', draft: 'var(--danger)', scheduled: 'var(--warning)' };
+        tbody.innerHTML = latest.map((e) => `
+          <tr>
+            <td>${e.title}</td>
+            <td>${podcastMap[e.podcast_id] || 'Unknown'}</td>
+            <td>${formatDate(e.created_at)}</td>
+            <td>${e.duration || '00:00'}</td>
+            <td><span class="badge" style="background:${statusColor[e.status] || 'var(--primary)'};">${e.status}</span></td>
+            <td><a href="/podcasts" class="btn-secondary" style="padding:4px 12px;font-size:0.75rem;">Listen</a></td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error(error);
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);">Unable to load episodes.</td></tr>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
       const hero = document.querySelector('.hero-pure');
       const img = new Image();
       img.src = '/images/hero-bg.jpg';
-      img.onload = function() {
+      img.onload = function () {
         hero.style.backgroundImage = "url('/images/hero-bg.jpg')";
       };
-      img.onerror = function() {
+      img.onerror = function () {
         hero.style.background = 'linear-gradient(135deg, #1a1a1a, #2d2d2d)';
       };
+
+      loadStats();
+      loadFeaturedPodcasts();
+      loadCategoriesGrid();
+      loadLatestEpisodes();
     });
   </script>
 </body>
+
 </html>

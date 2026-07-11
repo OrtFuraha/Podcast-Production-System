@@ -1,8 +1,9 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const fs = require('fs');
+const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
+const fs = require("fs");
+const bcrypt = require("bcrypt");
 
-const dbPath = path.join(__dirname, '..', 'podcast.db');
+const dbPath = path.join(__dirname, "..", "podcast.db");
 
 // Delete existing database if it exists
 if (fs.existsSync(dbPath)) {
@@ -282,8 +283,81 @@ db.serialize(() => {
       ('Lifestyle', 'Everyday life and tips', 'fa-leaf')
   `);
 
-  console.log('✅ SQLite database created successfully!');
-  console.log('📁 Database file: podcast.db');
+  const hashedPassword = bcrypt.hashSync("Admin@12345", 10);
+  db.run(
+    `INSERT OR IGNORE INTO users (email, password, name, role, bio, avatar_url, social_links)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    [
+      "group1@podcast.com",
+      hashedPassword,
+      "Group1 Producer",
+      "producer",
+      "Experienced podcast producer for the Podcast Production System.",
+      "https://loremflickr.com/320/320/avatar",
+      JSON.stringify({
+        twitter: "@group1podcast",
+        linkedin: "group1-producer",
+      }),
+    ],
+  );
+
+  db.run(
+    `INSERT INTO podcasts (title, description, category, host, cover_image, status, is_featured, is_trending, user_id)
+     VALUES
+       ('Tech Talk Daily', 'Daily news and deep dives into technology.', 'Technology', 'Munyampeta Fiston', 'https://loremflickr.com/320/240/technology', 'published', 1, 1, 1),
+       ('Business Insights', 'Actionable business tips and interviews.', 'Business', 'Dukundane Belyse', 'https://loremflickr.com/320/240/business', 'published', 0, 1, 1),
+       ('Health & Wellness', 'Stories and advice for a healthier life.', 'Health', 'Dushime Divine', 'https://loremflickr.com/320/240/health', 'published', 0, 0, 1)`,
+  );
+
+  // Sample listener accounts (used to seed demo subscribers/comments)
+  const listenerPassword = bcrypt.hashSync("Listener@123", 10);
+  db.run(
+    `INSERT OR IGNORE INTO users (email, password, name, role) VALUES
+       ('sarah@email.com', ?, 'Sarah Johnson', 'listener'),
+       ('michael@email.com', ?, 'Michael Chen', 'listener'),
+       ('emily@email.com', ?, 'Emily White', 'listener')`,
+    [listenerPassword, listenerPassword, listenerPassword],
+  );
+
+  // Sample episodes for each seeded podcast
+  db.run(
+    `INSERT INTO episodes (podcast_id, title, description, duration, status, visibility, views, downloads) VALUES
+       (1, 'AI Revolution', 'Exploring the latest breakthroughs in artificial intelligence.', '45:30', 'published', 'public', 5234, 1890),
+       (1, 'The Future of Web Development', 'A look at what''s next for developers.', '38:12', 'published', 'public', 3120, 980),
+       (1, 'Quantum Computing Explained', 'Breaking down a complex topic.', '41:05', 'draft', 'public', 0, 0),
+       (2, 'Investment Strategies', 'Smart approaches to growing your portfolio.', '32:15', 'published', 'public', 4567, 1234),
+       (2, 'Startup Lessons Learned', 'Founders share what they wish they knew.', '29:47', 'scheduled', 'public', 0, 0),
+       (3, 'Mindfulness Meditation', 'A guided introduction to daily mindfulness.', '28:40', 'published', 'public', 2890, 760),
+       (3, 'Nutrition Myths Debunked', 'Separating fact from fiction.', '35:22', 'draft', 'public', 0, 0)`,
+  );
+
+  // Sample subscribers linking listeners to podcasts
+  db.run(
+    `INSERT OR IGNORE INTO subscribers (user_id, podcast_id) VALUES
+       (2, 1), (3, 1), (4, 1),
+       (2, 2), (4, 2),
+       (3, 3)`,
+  );
+
+  // Sample comments on episodes
+  db.run(
+    `INSERT INTO comments (episode_id, user_id, content, likes, is_pinned) VALUES
+       (1, 2, 'Great episode! Very informative and well-produced.', 15, 1),
+       (1, 3, 'Loved the discussion about AI. Looking forward to more episodes!', 8, 0),
+       (4, 4, 'Solid advice, already applying it to my portfolio.', 6, 0),
+       (6, 2, 'This helped me start a daily meditation habit, thank you!', 12, 0)`,
+  );
+
+  // Sample view events (used for the weekly listeners chart)
+  db.run(
+    `INSERT INTO views (episode_id, user_id, watch_time) VALUES
+       (1, 2, 2700), (1, 3, 1800), (1, 4, 2400),
+       (4, 2, 1900), (4, 4, 1500),
+       (6, 3, 1700), (6, 2, 1600)`,
+  );
+
+  console.log("✅ SQLite database created successfully!");
+  console.log("📁 Database file: podcast.db");
 });
 
 db.close();

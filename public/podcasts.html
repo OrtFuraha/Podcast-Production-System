@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
   <!-- Navigation -->
   <nav class="top-navbar">
@@ -32,139 +34,25 @@
     <div style="display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap;">
       <div style="flex:1;min-width:300px;">
         <div class="search-container" style="margin:0;">
-          <input type="text" class="search-input" placeholder="Search podcasts..." style="flex:1;">
-          <button class="btn-primary"><i class="fas fa-search"></i></button>
+          <input type="text" class="search-input" id="podcastSearchInput" placeholder="Search podcasts..." style="flex:1;">
+          <button class="btn-primary" onclick="renderPodcastGrid()"><i class="fas fa-search"></i></button>
         </div>
       </div>
       <div class="filter-group">
-        <select class="filter-select">
-          <option>All Categories</option>
-          <option>Technology</option>
-          <option>Business</option>
-          <option>Health</option>
-          <option>Music</option>
-          <option>Education</option>
+        <select class="filter-select" id="categoryFilterSelect" onchange="renderPodcastGrid()">
+          <option value="">All Categories</option>
         </select>
-        <select class="filter-select">
-          <option>Sort by: Latest</option>
-          <option>Most Popular</option>
-          <option>Most Subscribed</option>
+        <select class="filter-select" id="sortSelect" onchange="renderPodcastGrid()">
+          <option value="latest">Sort by: Latest</option>
+          <option value="popular">Most Popular</option>
+          <option value="subscribed">Most Subscribed</option>
         </select>
       </div>
     </div>
 
     <!-- Podcast Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Tech+Talk+Daily" alt="Tech Talk Daily">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Tech Talk Daily</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Munyampeta Fiston</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Technology</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 45 episodes</span>
-            <span><i class="fas fa-users"></i> 2.3K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Business+Insights" alt="Business Insights">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Business Insights</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dukundane Belyse</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Business</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 28 episodes</span>
-            <span><i class="fas fa-users"></i> 1.8K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Health+Wellness" alt="Health Wellness">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Health & Wellness</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Dushime Divine & Tuyisenge Kellia</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Health</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 32 episodes</span>
-            <span><i class="fas fa-users"></i> 2.1K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Music+Masters" alt="Music Masters">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Music Masters</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Rutaganda Morris</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Music</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 38 episodes</span>
-            <span><i class="fas fa-users"></i> 1.9K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Education+Now" alt="Education Now">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Education Now</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Shenge Bienvenue Audrey & Byiringiro Olivier</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Education</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 52 episodes</span>
-            <span><i class="fas fa-users"></i> 3.1K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="podcast-card">
-        <img src="https://via.placeholder.com/400x200/000000/C1121F?text=Sports+Talk" alt="Sports Talk">
-        <div class="podcast-card-body">
-          <div class="podcast-card-title">Sports Talk</div>
-          <div class="podcast-card-meta"><i class="fas fa-user"></i> Furaha Herve Ortega & Ntwari Prince</div>
-          <div class="podcast-card-meta"><i class="fas fa-tag"></i> Sports</div>
-          <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
-            <span><i class="fas fa-microphone"></i> 41 episodes</span>
-            <span><i class="fas fa-users"></i> 2.7K subscribers</span>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;">
-            <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;">Subscribe</button>
-            <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;">Explore</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pagination -->
-    <div style="display:flex;justify-content:center;gap:8px;margin-top:30px;">
-      <button class="btn-secondary" style="padding:8px 16px;">Previous</button>
-      <button class="btn-primary" style="padding:8px 16px;">1</button>
-      <button class="btn-secondary" style="padding:8px 16px;">2</button>
-      <button class="btn-secondary" style="padding:8px 16px;">3</button>
-      <button class="btn-secondary" style="padding:8px 16px;">Next</button>
+    <div id="podcastsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+      <div style="padding:30px;text-align:center;color:var(--text-secondary);grid-column:1/-1;">Loading podcasts...</div>
     </div>
   </div>
 
@@ -208,10 +96,115 @@
           </div>
         </div>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+      <div
+        style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
         &copy; 2026 Podcast Production System. All rights reserved.
       </div>
     </div>
   </footer>
+  <script src="/js/main.js"></script>
+  <script>
+    let allPodcasts = [];
+    const params = new URLSearchParams(window.location.search);
+    const initialCategory = params.get('category') || '';
+
+    async function loadCategoriesFilter() {
+      const result = await fetchCategories();
+      const select = document.getElementById('categoryFilterSelect');
+      if (result && result.success) {
+        select.innerHTML = '<option value="">All Categories</option>' +
+          result.data.map((c) => `<option value="${c.name}">${c.name}</option>`).join('');
+      }
+      if (initialCategory) select.value = initialCategory;
+    }
+
+    async function loadPodcasts() {
+      try {
+        const result = await apiRequest('/podcasts');
+        allPodcasts = (result && result.success) ? result.data : [];
+      } catch (error) {
+        allPodcasts = [];
+      }
+      renderPodcastGrid();
+    }
+
+    function renderPodcastGrid() {
+      const grid = document.getElementById('podcastsGrid');
+      const search = (document.getElementById('podcastSearchInput')?.value || '').toLowerCase();
+      const category = document.getElementById('categoryFilterSelect')?.value || '';
+      const sort = document.getElementById('sortSelect')?.value || 'latest';
+
+      let filtered = allPodcasts.filter((p) => {
+        const matchesSearch = !search ||
+          p.title.toLowerCase().includes(search) ||
+          (p.host || '').toLowerCase().includes(search);
+        const matchesCategory = !category || p.category === category;
+        return matchesSearch && matchesCategory;
+      });
+
+      if (sort === 'popular') {
+        filtered = filtered.slice().sort((a, b) => (b.episode_count || 0) - (a.episode_count || 0));
+      } else if (sort === 'subscribed') {
+        filtered = filtered.slice().sort((a, b) => (b.subscriber_count || 0) - (a.subscriber_count || 0));
+      } else {
+        filtered = filtered.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-secondary);grid-column:1/-1;">No podcasts found.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map((p) => `
+        <div class="podcast-card">
+          <img src="${p.cover_image || 'https://loremflickr.com/400/200/podcast'}" alt="${p.title}">
+          <div class="podcast-card-body">
+            <div class="podcast-card-title">${p.title}</div>
+            <div class="podcast-card-meta"><i class="fas fa-user"></i> ${p.host}</div>
+            <div class="podcast-card-meta"><i class="fas fa-tag"></i> ${p.category}</div>
+            <div style="display:flex;gap:12px;margin-top:8px;font-size:0.875rem;color:var(--text-secondary);">
+              <span><i class="fas fa-microphone"></i> ${p.episode_count || 0} episodes</span>
+              <span><i class="fas fa-users"></i> ${p.subscriber_count || 0} subscribers</span>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px;">
+              <button class="btn-primary" style="padding:6px 16px;font-size:0.875rem;" onclick="subscribeToPodcast(${p.id}, this)">Subscribe</button>
+              <button class="btn-secondary" style="padding:6px 16px;font-size:0.875rem;" onclick="window.location.href='/dashboard'">Explore</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function subscribeToPodcast(podcastId, btn) {
+      const userId = Number(localStorage.getItem('userId')) || 1;
+      btn.disabled = true;
+      try {
+        const response = await fetch('/api/subscriptions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, podcastId }),
+        });
+        const result = await response.json();
+        if (result.success) {
+          showToast('Subscribed successfully!', 'success');
+          await loadPodcasts();
+        } else {
+          showToast(result.message || 'Already subscribed', 'error');
+          btn.disabled = false;
+        }
+      } catch (error) {
+        console.error(error);
+        showToast('Unable to subscribe', 'error');
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCategoriesFilter();
+      loadPodcasts();
+      document.getElementById('podcastSearchInput').addEventListener('input', renderPodcastGrid);
+    });
+  </script>
 </body>
+
 </html>

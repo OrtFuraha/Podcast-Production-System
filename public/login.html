@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background: #f5f5f5;
@@ -21,7 +22,7 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .login-container {
       display: flex;
       max-width: 1000px;
@@ -29,11 +30,11 @@
       min-height: 600px;
       background: white;
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
       overflow: hidden;
       margin: 20px;
     }
-    
+
     .login-left {
       flex: 1;
       padding: 50px 40px;
@@ -42,7 +43,7 @@
       justify-content: center;
       background: white;
     }
-    
+
     .login-right {
       flex: 1;
       background: linear-gradient(135deg, #C1121F, #000000);
@@ -53,7 +54,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .login-right::before {
       content: '';
       position: absolute;
@@ -61,29 +62,29 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
     }
-    
+
     .login-right-content {
       position: relative;
       z-index: 1;
       text-align: center;
       color: white;
     }
-    
+
     .login-right-content .brand-icon {
       font-size: 4rem;
       margin-bottom: 20px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255, 255, 255, 0.9);
     }
-    
+
     .login-right-content h2 {
       font-size: 2.2rem;
       font-weight: 700;
       margin-bottom: 10px;
       color: white;
     }
-    
+
     .login-right-content p {
       font-size: 1rem;
       opacity: 0.8;
@@ -91,36 +92,36 @@
       margin: 0 auto;
       line-height: 1.6;
     }
-    
+
     .login-right-content .feature-list {
       margin-top: 30px;
       text-align: left;
       display: inline-block;
     }
-    
+
     .login-right-content .feature-list li {
       list-style: none;
       padding: 8px 0;
       font-size: 0.95rem;
       opacity: 0.9;
     }
-    
+
     .login-right-content .feature-list li i {
       margin-right: 12px;
       color: #C1121F;
     }
-    
+
     .login-logo {
       font-size: 1.8rem;
       font-weight: 700;
       color: #C1121F;
       margin-bottom: 8px;
     }
-    
+
     .login-logo i {
       margin-right: 10px;
     }
-    
+
     .login-logo .sub {
       font-size: 0.9rem;
       font-weight: 400;
@@ -128,17 +129,17 @@
       display: block;
       margin-top: 2px;
     }
-    
+
     .login-subtitle {
       color: #6B7280;
       font-size: 0.95rem;
       margin-bottom: 30px;
     }
-    
+
     .form-group {
       margin-bottom: 20px;
     }
-    
+
     .form-group label {
       display: block;
       font-weight: 500;
@@ -146,7 +147,7 @@
       margin-bottom: 6px;
       font-size: 0.9rem;
     }
-    
+
     .form-group input {
       width: 100%;
       padding: 12px 16px;
@@ -156,21 +157,21 @@
       transition: border-color 0.2s;
       background: #F8F9FA;
     }
-    
+
     .form-group input:focus {
       outline: none;
       border-color: #C1121F;
       box-shadow: 0 0 0 3px rgba(193, 18, 31, 0.1);
       background: white;
     }
-    
+
     .form-options {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 16px 0 24px;
     }
-    
+
     .form-options label {
       display: flex;
       align-items: center;
@@ -179,24 +180,24 @@
       color: #6B7280;
       cursor: pointer;
     }
-    
+
     .form-options label input[type="checkbox"] {
       width: 16px;
       height: 16px;
       accent-color: #C1121F;
     }
-    
+
     .form-options a {
       color: #C1121F;
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
     }
-    
+
     .form-options a:hover {
       text-decoration: underline;
     }
-    
+
     .btn-login {
       width: 100%;
       padding: 14px;
@@ -209,18 +210,18 @@
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    
+
     .btn-login:hover {
       opacity: 0.9;
     }
-    
+
     .divider {
       display: flex;
       align-items: center;
       margin: 24px 0;
       gap: 16px;
     }
-    
+
     .divider::before,
     .divider::after {
       content: '';
@@ -228,13 +229,13 @@
       height: 1px;
       background: #E5E7EB;
     }
-    
+
     .divider span {
       color: #6B7280;
       font-size: 0.85rem;
       white-space: nowrap;
     }
-    
+
     .btn-google {
       width: 100%;
       padding: 12px;
@@ -251,49 +252,49 @@
       justify-content: center;
       gap: 10px;
     }
-    
+
     .btn-google:hover {
       background: #F8F9FA;
       border-color: #C1121F;
     }
-    
+
     .btn-google i {
       color: #DB4437;
       font-size: 1.2rem;
     }
-    
+
     .signup-link {
       text-align: center;
       margin-top: 20px;
       font-size: 0.95rem;
       color: #6B7280;
     }
-    
+
     .signup-link a {
       color: #C1121F;
       font-weight: 600;
       text-decoration: none;
     }
-    
+
     .signup-link a:hover {
       text-decoration: underline;
     }
-    
+
     .login-without-password {
       text-align: center;
       margin: 12px 0;
     }
-    
+
     .login-without-password a {
       color: #6B7280;
       text-decoration: none;
       font-size: 0.9rem;
     }
-    
+
     .login-without-password a:hover {
       color: #C1121F;
     }
-    
+
     .back-home {
       position: fixed;
       top: 20px;
@@ -307,16 +308,16 @@
       background: white;
       padding: 10px 18px;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
       transition: all 0.2s;
       z-index: 100;
     }
-    
+
     .back-home:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
       color: #C1121F;
     }
-    
+
     .error-message {
       background: #FEE2E2;
       color: #DC2626;
@@ -327,11 +328,11 @@
       font-size: 0.9rem;
       border-left: 4px solid #DC2626;
     }
-    
+
     .error-message.show {
       display: block;
     }
-    
+
     .success-message {
       background: #DCFCE7;
       color: #16A34A;
@@ -342,11 +343,11 @@
       font-size: 0.9rem;
       border-left: 4px solid #16A34A;
     }
-    
+
     .success-message.show {
       display: block;
     }
-    
+
     @media (max-width: 768px) {
       .login-container {
         flex-direction: column;
@@ -355,35 +356,35 @@
         min-height: auto;
         border-radius: 16px;
       }
-      
+
       .login-left {
         padding: 30px 24px;
         order: 2;
       }
-      
+
       .login-right {
         padding: 30px 24px;
         order: 1;
         min-height: 200px;
       }
-      
+
       .login-right-content h2 {
         font-size: 1.6rem;
       }
-      
+
       .login-right-content .brand-icon {
         font-size: 2.5rem;
         margin-bottom: 12px;
       }
-      
+
       .login-right-content .feature-list {
         display: none;
       }
-      
+
       .login-logo {
         font-size: 1.5rem;
       }
-      
+
       .back-home {
         top: 10px;
         left: 10px;
@@ -391,26 +392,26 @@
         font-size: 0.8rem;
       }
     }
-    
+
     @media (max-width: 480px) {
       .login-left {
         padding: 20px 16px;
       }
-      
+
       .login-right {
         padding: 20px 16px;
         min-height: 150px;
       }
-      
+
       .login-right-content h2 {
         font-size: 1.3rem;
       }
-      
+
       .form-group input {
         padding: 10px 14px;
         font-size: 0.95rem;
       }
-      
+
       .btn-login {
         padding: 12px;
         font-size: 0.95rem;
@@ -418,6 +419,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Back to Home -->
   <a href="/" class="back-home">
@@ -436,7 +438,7 @@
       <div id="errorMessage" class="error-message">
         <i class="fas fa-exclamation-circle"></i> Invalid credentials. Please try again.
       </div>
-      
+
       <div id="successMessage" class="success-message">
         <i class="fas fa-check-circle"></i> Login successful! Redirecting...
       </div>
@@ -500,81 +502,65 @@
   </div>
 
   <script>
-    // Set default credentials
-    const VALID_EMAIL = 'group1@podcast.com';
-    const VALID_PASSWORD = 'Admin@12345';
-
-    function handleLogin(event) {
+    async function handleLogin(event) {
       event.preventDefault();
-      
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const errorMsg = document.getElementById('errorMessage');
       const successMsg = document.getElementById('successMessage');
-      
-      // Hide previous messages
+      const btn = document.querySelector('.btn-login');
+
       errorMsg.classList.remove('show');
       successMsg.classList.remove('show');
-      
-      // Validate credentials
-      if (email === VALID_EMAIL && password === VALID_PASSWORD) {
-        // Show success
-        successMsg.classList.add('show');
-        
-        const btn = document.querySelector('.btn-login');
-        btn.textContent = 'Logging in...';
-        btn.disabled = true;
-        
-        // Store login state
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userName', 'Group1');
-        
-        setTimeout(() => {
-          btn.textContent = '✓ Logged In!';
-          btn.style.background = '#16A34A';
-          
-          setTimeout(() => {
-            window.location.href = '/dashboard';
-          }, 1000);
-        }, 1500);
-      } else {
-        // Show error
+      btn.disabled = false;
+      btn.textContent = 'Log In';
+
+      if (!email || !password) {
+        errorMsg.textContent = 'Please enter email and password';
         errorMsg.classList.add('show');
-        
-        // Shake animation
-        const form = document.getElementById('loginForm');
-        form.style.animation = 'shake 0.5s';
+        return;
+      }
+
+      btn.textContent = 'Logging in...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.message || 'Unable to login');
+        }
+
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('userName', result.user.name || 'Podcast Creator');
+        localStorage.setItem('userId', result.user.id);
+        localStorage.setItem('isLoggedIn', 'true');
+
+        successMsg.textContent = 'Login successful! Redirecting...';
+        successMsg.classList.add('show');
+        btn.textContent = '✓ Logged In!';
+        btn.style.background = '#16A34A';
+
         setTimeout(() => {
-          form.style.animation = '';
-        }, 500);
-        
-        // Clear password
+          window.location.href = '/dashboard';
+        }, 800);
+      } catch (error) {
+        errorMsg.textContent = error.message || 'Invalid credentials. Please try again.';
+        errorMsg.classList.add('show');
+        btn.textContent = 'Log In';
+        btn.disabled = false;
         document.getElementById('password').value = '';
         document.getElementById('password').focus();
       }
     }
 
     function handleGoogleLogin() {
-      const btn = document.querySelector('.btn-google');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        btn.innerHTML = '✓ Connected!';
-        btn.style.borderColor = '#16A34A';
-        btn.style.color = '#16A34A';
-        
-        // Store login state
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', 'group1@podcast.com');
-        localStorage.setItem('userName', 'Group1');
-        
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 1000);
-      }, 1500);
+      alert('Please use email login for full database authentication.');
     }
 
     // Add shake animation
@@ -589,18 +575,18 @@
     document.head.appendChild(style);
 
     // Enter key support
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         const form = document.getElementById('loginForm');
-        if (form && (document.activeElement === document.getElementById('email') || 
-            document.activeElement === document.getElementById('password'))) {
+        if (form && (document.activeElement === document.getElementById('email') ||
+          document.activeElement === document.getElementById('password'))) {
           form.dispatchEvent(new Event('submit'));
         }
       }
     });
 
     // Pre-fill credentials on load
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Check if already logged in
       if (localStorage.getItem('isLoggedIn') === 'true') {
         window.location.href = '/dashboard';
@@ -608,4 +594,5 @@
     });
   </script>
 </body>
+
 </html>

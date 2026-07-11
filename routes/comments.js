@@ -1,66 +1,156 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-let comments = [
-  {
-    id: 1,
-    episodeId: 1,
-    userId: 1,
-    userName: 'Listener01',
-    content: 'Great episode! Very informative.',
-    likes: 15,
-    dislikes: 2,
-    createdAt: '2026-01-15T12:30:00.000Z',
-    replies: [
-      {
-        id: 101,
-        userId: 2,
-        userName: 'SarahHost',
-        content: 'Thank you for your feedback!',
-        createdAt: '2026-01-15T13:00:00.000Z'
+const getDb = (req) => req.app.locals.db;
+
+// List all comments (joined with user + episode info) - used by dashboard
+router.get("/", (req, res) => {
+  const db = getDb(req);
+  db.all(
+    `SELECT c.*, u.name AS user_name, e.title AS episode_title
+     FROM comments c
+     JOIN users u ON u.id = c.user_id
+     JOIN episodes e ON e.id = c.episode_id
+     ORDER BY c.created_at DESC`,
+    (err, rows) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
       }
-    ]
-  }
-];
-
-router.get('/episode/:episodeId', (req, res) => {
-  const episodeComments = comments.filter(c => c.episodeId === parseInt(req.params.episodeId));
-  res.json({ success: true, data: episodeComments });
+      res.json({ success: true, data: rows });
+    },
+  );
 });
 
-router.post('/', (req, res) => {
-  const { episodeId, userId, content } = req.body;
-  const newComment = {
-    id: comments.length + 1,
-    episodeId,
-    userId,
-    userName: 'User' + userId,
-    content,
-    likes: 0,
-    dislikes: 0,
-    createdAt: new Date().toISOString(),
-    replies: []
-  };
-  comments.push(newComment);
-  res.status(201).json({ success: true, data: newComment });
+router.get("/episode/:episodeId", (req, res) => {
+  const db = getDb(req);
+  db.all(
+    `SELECT c.*, u.name AS user_name
+     FROM comments c
+     JOIN users u ON u.id = c.user_id
+     WHERE c.episode_id = ?
+     ORDER BY c.created_at DESC`,
+    [req.params.episodeId],
+    (err, rows) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
+      }
+      res.json({ success: true, data: rows });
+    },
+  );
 });
 
-router.post('/:commentId/like', (req, res) => {
-  const comment = comments.find(c => c.id === parseInt(req.params.commentId));
-  if (!comment) {
-    return res.status(404).json({ success: false, message: 'Comment not found' });
+router.post("/", (req, res) => {
+  const db = getDb(req);
+  const { episodeId, userId, content, parentId } = req.body;
+  if (!episodeId || !userId || !content) {
+    return res.status(400).json({
+      success: false,
+      message: "episodeId, userId and content are required",
+    });
   }
-  comment.likes += 1;
-  res.json({ success: true, data: comment });
+
+  db.run(
+    "INSERT INTO comments (episode_id, user_id, content, parent_id) VALUES (?, ?, ?, ?)",
+    [episodeId, userId, content, parentId || null],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
+      }
+      db.get(
+        `SELECT c.*, u.name AS user_name
+         FROM comments c JOIN users u ON u.id = c.user_id
+         WHERE c.id = ?`,
+        [this.lastID],
+        (err, row) => {
+          if (err) {
+            return res
+              .status(500)
+              .json({ success: false, message: err.message });
+          }
+          res.status(201).json({ success: true, data: row });
+        },
+      );
+    },
+  );
 });
 
-router.delete('/:commentId', (req, res) => {
-  const index = comments.findIndex(c => c.id === parseInt(req.params.commentId));
-  if (index === -1) {
-    return res.status(404).json({ success: false, message: 'Comment not found' });
-  }
-  comments.splice(index, 1);
-  res.json({ success: true, message: 'Comment deleted' });
+router.post("/:commentId/like", (req, res) => {
+  const db = getDb(req);
+  db.run(
+    "UPDATE comments SET likes = likes + 1 WHERE id = ?",
+    [req.params.commentId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
+      }
+      if (this.changes === 0) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Comment not found" });
+      }
+      db.get(
+        "SELECT * FROM comments WHERE id = ?",
+        [req.params.commentId],
+        (err, row) => {
+          if (err) {
+            return res
+              .status(500)
+              .json({ success: false, message: err.message });
+          }
+          res.json({ success: true, data: row });
+        },
+      );
+    },
+  );
+});
+
+router.post("/:commentId/pin", (req, res) => {
+  const db = getDb(req);
+  db.run(
+    "UPDATE comments SET is_pinned = NOT is_pinned WHERE id = ?",
+    [req.params.commentId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
+      }
+      if (this.changes === 0) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Comment not found" });
+      }
+      db.get(
+        "SELECT * FROM comments WHERE id = ?",
+        [req.params.commentId],
+        (err, row) => {
+          if (err) {
+            return res
+              .status(500)
+              .json({ success: false, message: err.message });
+          }
+          res.json({ success: true, data: row });
+        },
+      );
+    },
+  );
+});
+
+router.delete("/:commentId", (req, res) => {
+  const db = getDb(req);
+  db.run(
+    "DELETE FROM comments WHERE id = ?",
+    [req.params.commentId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: err.message });
+      }
+      if (this.changes === 0) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Comment not found" });
+      }
+      res.json({ success: true, message: "Comment deleted" });
+    },
+  );
 });
 
 module.exports = router;

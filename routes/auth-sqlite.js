@@ -65,6 +65,9 @@ router.post('/register', [
       { expiresIn: process.env.JWT_EXPIRE || '7d' }
     );
     
+    req.session.userId = user.id;
+    req.session.user = { id: user.id, email: user.email, name: user.name, role: user.role };
+
     res.status(201).json({
       success: true,
       token,
@@ -109,14 +112,18 @@ router.post('/login', [
     
     // Update last login
     db.run('UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?', [user.id]);
-    
+
     // Generate token
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET || 'secret',
       { expiresIn: process.env.JWT_EXPIRE || '7d' }
     );
-    
+
+    // Establish a server-side session so protected page routes (e.g. /studio) can be gated
+    req.session.userId = user.id;
+    req.session.user = { id: user.id, email: user.email, name: user.name, role: user.role };
+
     res.json({
       success: true,
       token,
@@ -151,7 +158,13 @@ router.get('/me', (req, res) => {
 
 // Logout
 router.post('/logout', (req, res) => {
-  res.json({ success: true, message: 'Logged out successfully' });
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Unable to log out' });
+    }
+    res.clearCookie('connect.sid');
+    res.json({ success: true, message: 'Logged out successfully' });
+  });
 });
 
 module.exports = router;

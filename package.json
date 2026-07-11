@@ -2,10 +2,10 @@
   "name": "podcast-production-system",
   "version": "1.0.0",
   "description": "Professional Podcast Production System for Multimedia Systems Course",
-  "main": "server.js",
+  "main": "server-sqlite.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server-sqlite.js",
+    "dev": "nodemon server-sqlite.js",
     "test": "jest",
     "init-db": "node scripts/init-db-sqlite.js",
     "seed": "node scripts/seed.js"

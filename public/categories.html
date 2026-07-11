@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Categories - Podcast Production System</title>
+  <title>Categories - Multimedia Production System</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -18,27 +19,32 @@
       position: relative;
       overflow: hidden;
     }
+
     .category-card:hover {
       box-shadow: var(--shadow-lg);
       border-color: var(--primary);
     }
+
     .category-card .category-icon {
       font-size: 3rem;
       color: var(--primary);
       margin-bottom: 12px;
       display: block;
     }
+
     .category-card .category-count {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary);
       margin: 8px 0;
     }
+
     .category-card .category-name {
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .category-card .browse-btn {
       margin-top: 12px;
       width: 100%;
@@ -51,11 +57,13 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .category-card .browse-btn:hover {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
     }
+
     .category-card .category-badge {
       position: absolute;
       top: 10px;
@@ -67,6 +75,7 @@
       font-size: 0.7rem;
       font-weight: 600;
     }
+
     .categories-header {
       background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: white;
@@ -75,14 +84,17 @@
       margin-bottom: 30px;
       text-align: center;
     }
+
     .categories-header h1 {
       font-size: 2.5rem;
       margin-bottom: 8px;
     }
+
     .categories-header p {
       opacity: 0.9;
       font-size: 1.1rem;
     }
+
     .category-stats {
       display: flex;
       justify-content: center;
@@ -90,14 +102,16 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
+
     .category-stats span {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 6px 18px;
       border-radius: 20px;
       font-size: 0.875rem;
     }
   </style>
 </head>
+
 <body>
   <!-- Navigation -->
   <nav class="top-navbar">
@@ -125,171 +139,57 @@
       <h1>Browse Categories</h1>
       <p>Discover podcasts by category and find your next favorite show</p>
       <div class="category-stats">
-        <span><i class="fas fa-podcast"></i> 12 Categories</span>
-        <span><i class="fas fa-microphone"></i> 2,500+ Podcasts</span>
+        <span id="categoryCountDisplay"><i class="fas fa-podcast"></i> 0 Categories</span>
+        <span id="podcastCountDisplay"><i class="fas fa-microphone"></i> 0 Podcasts</span>
         <span><i class="fas fa-users"></i> 50K+ Subscribers</span>
       </div>
     </div>
 
-    <!-- Category Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;">
-      <!-- Technology -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Technology'">
-        <span class="category-badge">Popular</span>
-        <i class="fas fa-microchip category-icon"></i>
-        <div class="category-name">Technology</div>
-        <div class="category-count">345</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Technology'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
+    <div
+      style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <button class="btn-primary" onclick="toggleCategoryForm()">+ Add Category</button>
+      <div id="categoryStatus" style="color:var(--text-secondary);"></div>
+    </div>
+    <div id="categoryForm"
+      style="display:none;background:white;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px;">
+      <h3 style="margin-top:0;">Manage Categories</h3>
+      <div style="display:grid;gap:12px;">
+        <input id="newCategoryName" type="text" placeholder="Category name"
+          style="padding:12px;border:1px solid var(--border);border-radius:10px;" />
+        <input id="newCategoryDescription" type="text" placeholder="Description"
+          style="padding:12px;border:1px solid var(--border);border-radius:10px;" />
+        <input id="newCategoryIcon" type="text" placeholder="Icon class (e.g. fa-microchip)"
+          style="padding:12px;border:1px solid var(--border);border-radius:10px;" />
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="createCategory()">Create Category</button>
+          <button class="btn-secondary" onclick="toggleCategoryForm(true)">Cancel</button>
+        </div>
       </div>
-
-      <!-- Education -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Education'">
-        <span class="category-badge">Trending</span>
-        <i class="fas fa-graduation-cap category-icon"></i>
-        <div class="category-name">Education</div>
-        <div class="category-count">289</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Education'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Business -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Business'">
-        <span class="category-badge">Featured</span>
-        <i class="fas fa-chart-line category-icon"></i>
-        <div class="category-name">Business</div>
-        <div class="category-count">412</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Business'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Entertainment -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Entertainment'">
-        <span class="category-badge">Most Listened</span>
-        <i class="fas fa-film category-icon"></i>
-        <div class="category-name">Entertainment</div>
-        <div class="category-count">567</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Entertainment'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Health -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Health'">
-        <i class="fas fa-heartbeat category-icon"></i>
-        <div class="category-name">Health</div>
-        <div class="category-count">198</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Health'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Music -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Music'">
-        <span class="category-badge">Popular</span>
-        <i class="fas fa-music category-icon"></i>
-        <div class="category-name">Music</div>
-        <div class="category-count">234</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Music'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Sports -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Sports'">
-        <i class="fas fa-futbol category-icon"></i>
-        <div class="category-name">Sports</div>
-        <div class="category-count">178</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Sports'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- News -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=News'">
-        <span class="category-badge">Trending</span>
-        <i class="fas fa-newspaper category-icon"></i>
-        <div class="category-name">News</div>
-        <div class="category-count">156</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=News'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Comedy -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Comedy'">
-        <i class="fas fa-laugh category-icon"></i>
-        <div class="category-name">Comedy</div>
-        <div class="category-count">203</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Comedy'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Lifestyle -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Lifestyle'">
-        <i class="fas fa-leaf category-icon"></i>
-        <div class="category-name">Lifestyle</div>
-        <div class="category-count">167</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Lifestyle'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- AI & Tech -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=AI & Tech'">
-        <span class="category-badge">New</span>
-        <i class="fas fa-robot category-icon"></i>
-        <div class="category-name">AI & Tech</div>
-        <div class="category-count">145</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=AI & Tech'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
-
-      <!-- Culture -->
-      <div class="category-card" onclick="window.location.href='/podcasts?category=Culture'">
-        <i class="fas fa-globe category-icon"></i>
-        <div class="category-name">Culture</div>
-        <div class="category-count">189</div>
-        <div style="color:var(--text-secondary);font-size:0.875rem;">podcasts</div>
-        <button class="browse-btn" onclick="event.stopPropagation(); window.location.href='/podcasts?category=Culture'">
-          <i class="fas fa-arrow-right"></i> Browse
-        </button>
-      </div>
+    </div>
+    <div id="categoryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;">
     </div>
 
     <!-- Featured Categories Section -->
     <div style="margin-top:50px;background:var(--accent);border-radius:var(--radius);padding:30px;">
       <h2 style="margin-bottom:20px;text-align:center;">Top Categories This Week</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+        <div
+          style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
           <div style="font-weight:700;font-size:1.2rem;">Entertainment</div>
           <div style="color:var(--text-secondary);font-size:0.875rem;">567 podcasts</div>
         </div>
-        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+        <div
+          style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
           <div style="font-weight:700;font-size:1.2rem;">Business</div>
           <div style="color:var(--text-secondary);font-size:0.875rem;">412 podcasts</div>
         </div>
-        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+        <div
+          style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
           <div style="font-weight:700;font-size:1.2rem;">Technology</div>
           <div style="color:var(--text-secondary);font-size:0.875rem;">345 podcasts</div>
         </div>
-        <div style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
+        <div
+          style="background:white;padding:15px;border-radius:8px;text-align:center;border-left:4px solid var(--primary);">
           <div style="font-weight:700;font-size:1.2rem;">Education</div>
           <div style="color:var(--text-secondary);font-size:0.875rem;">289 podcasts</div>
         </div>
@@ -337,10 +237,162 @@
           </div>
         </div>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
+      <div
+        style="border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;padding-top:20px;text-align:center;font-size:0.875rem;">
         &copy; 2026 Podcast Production System. All rights reserved.
       </div>
     </div>
   </footer>
+  <script>
+    let categories = [];
+
+    function toggleCategoryForm(close = false) {
+      const form = document.getElementById('categoryForm');
+      if (!form) return;
+      form.style.display = close ? 'none' : form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function loadCategories() {
+      try {
+        const response = await fetch('/api/categories');
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          document.getElementById('categoryStatus').textContent = 'Unable to load categories.';
+          return;
+        }
+        categories = result.data;
+        renderCategories();
+      } catch (error) {
+        console.error(error);
+        document.getElementById('categoryStatus').textContent = 'Unable to load categories.';
+      }
+    }
+
+    function renderCategories() {
+      const grid = document.getElementById('categoryGrid');
+      const countDisplay = document.getElementById('categoryCountDisplay');
+      const podcastDisplay = document.getElementById('podcastCountDisplay');
+      grid.innerHTML = '';
+
+      const totalPodcasts = categories.reduce((sum, category) => sum + (category.podcast_count || 0), 0);
+      countDisplay.innerHTML = `<i class="fas fa-podcast"></i> ${categories.length} Categories`;
+      podcastDisplay.innerHTML = `<i class="fas fa-microphone"></i> ${totalPodcasts} Podcasts`;
+
+      if (categories.length === 0) {
+        grid.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-secondary);">No categories found. Add a new category to get started.</div>';
+        return;
+      }
+
+      categories.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.innerHTML = `
+          <span class="category-badge">${category.podcast_count || 0} shows</span>
+          <i class="fas ${category.icon || 'fa-folder'} category-icon"></i>
+          <div class="category-name">${category.name}</div>
+          <div class="category-count">${category.podcast_count || 0}</div>
+          <div style="color:var(--text-secondary);font-size:0.875rem;">${category.description || 'No description available.'}</div>
+          <div style="display:flex;justify-content:space-between;gap:8px;margin-top:16px;flex-wrap:wrap;">
+            <button class="browse-btn" onclick="window.location.href='/podcasts?category=${encodeURIComponent(category.name)}'; event.stopPropagation();">
+              <i class="fas fa-arrow-right"></i> Browse
+            </button>
+            <button class="btn-secondary" style="padding:.65rem 1rem;" onclick="editCategory(${category.id}); event.stopPropagation();">Edit</button>
+            <button class="btn-secondary" style="padding:.65rem 1rem;color:#DC2626;border-color:rgba(220,38,38,0.2);" onclick="deleteCategory(${category.id}); event.stopPropagation();">Delete</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    async function createCategory() {
+      const name = document.getElementById('newCategoryName').value.trim();
+      const description = document.getElementById('newCategoryDescription').value.trim();
+      const icon = document.getElementById('newCategoryIcon').value.trim() || 'fa-folder';
+      const status = document.getElementById('categoryStatus');
+
+      if (!name) {
+        status.textContent = 'Category name is required.';
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/categories', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, description, icon })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          status.textContent = result.message || 'Unable to create category.';
+          return;
+        }
+        const newCategory = { ...result.data, podcast_count: result.data.podcast_count || 0 };
+        categories.push(newCategory);
+        renderCategories();
+        toggleCategoryForm(true);
+        document.getElementById('newCategoryName').value = '';
+        document.getElementById('newCategoryDescription').value = '';
+        document.getElementById('newCategoryIcon').value = '';
+        status.textContent = 'Category created successfully.';
+      } catch (error) {
+        console.error(error);
+        status.textContent = 'Unable to create category.';
+      }
+    }
+
+    async function deleteCategory(id) {
+      if (!confirm('Delete this category?')) return;
+      try {
+        const response = await fetch(`/api/categories/${id}`, { method: 'DELETE' });
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          alert(result.message || 'Unable to delete category.');
+          return;
+        }
+        categories = categories.filter((category) => category.id !== id);
+        renderCategories();
+      } catch (error) {
+        console.error(error);
+        alert('Unable to delete category.');
+      }
+    }
+
+    async function editCategory(id) {
+      const category = categories.find((item) => item.id === id);
+      if (!category) return;
+      const name = prompt('Category name', category.name);
+      if (!name) return;
+      const description = prompt('Category description', category.description || '');
+      const icon = prompt('Icon class', category.icon || 'fa-folder');
+
+      try {
+        const response = await fetch(`/api/categories/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, description, icon })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          alert(result.message || 'Unable to update category.');
+          return;
+        }
+        const updatedCategory = {
+          ...result.data,
+          podcast_count: result.data.podcast_count || categories.find((item) => item.id === id)?.podcast_count || 0,
+        };
+        const index = categories.findIndex((item) => item.id === id);
+        if (index !== -1) {
+          categories[index] = updatedCategory;
+        }
+        renderCategories();
+      } catch (error) {
+        console.error(error);
+        alert('Unable to update category.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCategories);
+  </script>
 </body>
+
 </html>
