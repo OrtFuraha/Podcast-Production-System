@@ -11,12 +11,42 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3333;
 
+// If the app runs behind a reverse proxy in production, trust it for secure cookies.
+app.set("trust proxy", 1);
+
 // Database setup
 const dbPath = path.join(__dirname, process.env.DB_PATH || "podcast.db");
 const db = new sqlite3.Database(dbPath);
 
 // Make db available to routes
 app.locals.db = db;
+
+// Seed default users if the database is empty.
+db.serialize(() => {
+  db.get("SELECT COUNT(*) AS count FROM users", (err, row) => {
+    if (err || !row || row.count > 0) return;
+
+    const adminPassword = bcrypt.hashSync("Admin@12345", 10);
+    const listenerPassword = bcrypt.hashSync("Listener@123", 10);
+
+    db.run(
+      "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)",
+      ["group1@podcast.com", adminPassword, "Group1 Producer", "producer"],
+    );
+    db.run(
+      "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)",
+      ["sarah@email.com", listenerPassword, "Sarah Johnson", "listener"],
+    );
+    db.run(
+      "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)",
+      ["michael@email.com", listenerPassword, "Michael Chen", "listener"],
+    );
+    db.run(
+      "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)",
+      ["emily@email.com", listenerPassword, "Emily White", "listener"],
+    );
+  });
+});
 
 // Security middleware
 app.use(
@@ -50,8 +80,10 @@ app.use(
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
     saveUninitialized: false,
+    proxy: process.env.NODE_ENV === "production",
     cookie: {
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000,
     },
   }),
